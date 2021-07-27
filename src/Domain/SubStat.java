@@ -19,7 +19,7 @@ public class SubStat {
         this.tier4 = 0;
     }
 
-    public SubStat(String mainStat) {
+    public SubStat(String mainStat, String subStat1, String subStat2, String subStat3) {
         do {
             this.value = 0;
             switch (new Random().nextInt(10)) {
@@ -95,8 +95,8 @@ public class SubStat {
                     break;
                 default:
             }
-            roll();
-        }while (this.name.equals(mainStat));
+        }while (this.name.equals(mainStat) | this.name.equals(subStat1) | this.name.equals(subStat2) | this.name.equals(subStat3));
+        roll();
     }
     public void roll(){
         double roll;
@@ -162,5 +162,17 @@ public class SubStat {
 
     public void setTier4(double tier4) {
         this.tier4 = tier4;
+    }
+
+    @Override
+    public String toString() {
+        return "SubStat{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                ", tier1=" + tier1 +
+                ", tier2=" + tier2 +
+                ", tier3=" + tier3 +
+                ", tier4=" + tier4 +
+                '}';
     }
 }

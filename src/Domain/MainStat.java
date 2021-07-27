@@ -6,26 +6,28 @@ public class MainStat {
     private String name;
     private String piece;
     private double value;
-    private int currentLevel;
     private double increment;
 
-    public MainStat(String piece) {
-        this.piece = piece;
-        this.currentLevel = 0;
-        switch(this.piece){
-            case "Flower of Life":
+    public MainStat() {
+        switch(new Random().nextInt(5)){
+            case 0:
+                this.piece = "Flower of Life";
                 rollFlower();
                 break;
-            case "Plume of Death":
+            case 1:
+                this.piece = "Plume of Death";
                 rollPlume();
                 break;
-            case "Sands of Eon":
+            case 2:
+                this.piece = "Sands of Eon";
                 rollSands();
                 break;
-            case "Goblet of Eonothem":
+            case 3:
+                this.piece = "Goblet of Eonothem";
                 rollGoblet();
                 break;
-            case "Circlet of Logos":
+            case 4:
+                this.piece = "Circlet of Logos";
                 rollCirclet();
                 break;
             default:
@@ -151,10 +153,54 @@ public class MainStat {
             this.increment = 2.645;
         }else{
             this.name = "Healing Bonus%";
-            this.value = 1.525;
-            this.increment = 7.95;
+            this.value = 5.4;
+            this.increment = 1.525;
         }
     }
 
+    public void upgrade() {
+        this.value += this.increment*4;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPiece() {
+        return piece;
+    }
+
+    public void setPiece(String piece) {
+        this.piece = piece;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public double getIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(double increment) {
+        this.increment = increment;
+    }
+
+    @Override
+    public String toString() {
+        if(name.contains("%")){
+            String newName = name.substring(0, name.length()-1);
+            return '\'' + newName + '\'' + ": "+ String.format("%.1f", value) + "%\n";
+        }else{
+            return '\'' + name + '\'' + ": "+ (int)value + "\n";
+        }
+    }
 }

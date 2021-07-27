@@ -16,11 +16,11 @@ public class SubStats {
     }
 
     public void initializeSubStat(){
-        subStat1 = new SubStat(this.mainStat);
-        subStat2 = new SubStat(this.mainStat);
-        subStat3 = new SubStat(this.mainStat);
+        subStat1 = new SubStat(this.mainStat,"", "", "");
+        subStat2 = new SubStat(this.mainStat, subStat1.getName(), "", "");
+        subStat3 = new SubStat(this.mainStat, subStat1.getName(), subStat2.getName(), "");
         if (new Random().nextInt(3) == 0){
-            subStat4 = new SubStat(this.mainStat);
+            subStat4 = new SubStat(this.mainStat, subStat1.getName(), subStat2.getName(), subStat3.getName());
         }else{
             subStat4 = new SubStat();
         }
@@ -28,7 +28,7 @@ public class SubStats {
 
     public void upgrade(){
         if(subStat4.getName().equals("undefined")) {
-            subStat4 = new SubStat(this.mainStat);
+            subStat4 = new SubStat(this.mainStat, subStat1.getName(), subStat2.getName(), subStat3.getName());
         }else{
             switch (new Random().nextInt(4)) {
                 case 0:
@@ -44,5 +44,37 @@ public class SubStats {
                     subStat4.roll();
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        String str = "\n";
+        if(subStat1.getName().contains("%")){
+            String newName = subStat1.getName().substring(0, subStat1.getName().length()-1);
+            str += '\'' + newName + '\'' + " +"+ String.format("%.1f", subStat1.getValue()) + "%\n";
+        }else{
+            str += '\'' + subStat1.getName() + '\'' + " +"+ (int)subStat1.getValue() + "\n";
+        }
+        if(subStat2.getName().contains("%")){
+            String newName = subStat2.getName().substring(0, subStat2.getName().length()-1);
+            str += '\'' + newName + '\'' + " +"+ String.format("%.1f", subStat2.getValue()) + "%\n";
+        }else{
+            str += '\'' + subStat2.getName() + '\'' + " +"+ (int)subStat2.getValue() + "\n";
+        }
+        if(subStat3.getName().contains("%")){
+            String newName = subStat3.getName().substring(0, subStat3.getName().length()-1);
+            str += '\'' + newName + '\'' + " +"+ String.format("%.1f", subStat3.getValue()) + "%\n";
+        }else{
+            str += '\'' + subStat3.getName() + '\'' + " +"+ (int)subStat3.getValue() + "\n";
+        }
+        if(!subStat4.getName().equals("undefined")){
+            if (subStat4.getName().contains("%")) {
+                String newName = subStat4.getName().substring(0, subStat4.getName().length() - 1);
+                str += '\'' + newName + '\'' + " +" + String.format("%.1f", subStat4.getValue()) + "%\n";
+            } else {
+                str += '\'' + subStat4.getName() + '\'' + " +" + (int) subStat4.getValue() + "\n";
+            }
+        }
+        return str;
     }
 }
