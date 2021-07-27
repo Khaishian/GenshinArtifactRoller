@@ -1,4 +1,4 @@
-package Domain;
+package Mihoyo;
 
 import java.util.Random;
 
@@ -8,45 +8,40 @@ public class MainStat {
     private double value;
     private double increment;
 
-    public MainStat() {
-        switch(new Random().nextInt(5)){
-            case 0:
-                this.piece = "Flower of Life";
+    public MainStat(String piece) {
+        switch(piece){
+            case "Flower of Life":
                 rollFlower();
                 break;
-            case 1:
-                this.piece = "Plume of Death";
+            case "Plume of Death":
                 rollPlume();
                 break;
-            case 2:
-                this.piece = "Sands of Eon";
+            case "Sands of Eon":
                 rollSands();
                 break;
-            case 3:
-                this.piece = "Goblet of Eonothem";
+            case "Goblet of Eonothem":
                 rollGoblet();
                 break;
-            case 4:
-                this.piece = "Circlet of Logos";
+            case "Circlet of Logos":
                 rollCirclet();
                 break;
             default:
         }
     }
 
-    public void rollFlower(){
+    private void rollFlower(){
         this.name = "HP";
         this.value = 717;
         this.increment = 203.15;
     }
 
-    public void rollPlume(){
+    private void rollPlume(){
         this.name = "ATK";
         this.value = 47;
         this.increment = 13.2;
     }
 
-    public void rollSands(){
+    private void rollSands(){
         double prob = Math.random();
         if (prob < 0.2668){
             this.name = "HP%";
@@ -71,7 +66,7 @@ public class MainStat {
         }
     }
 
-    public void rollGoblet(){
+    private void rollGoblet(){
         double prob = Math.random();
         if (prob < 0.2125){
             this.name = "HP%";
@@ -125,7 +120,7 @@ public class MainStat {
         }
     }
 
-    public void rollCirclet(){
+    private void rollCirclet(){
         double prob = Math.random();
         if (prob < 0.22){
             this.name = "HP%";
@@ -198,9 +193,9 @@ public class MainStat {
     public String toString() {
         if(name.contains("%")){
             String newName = name.substring(0, name.length()-1);
-            return '\'' + newName + '\'' + ": "+ String.format("%.1f", value) + "%\n";
+            return newName + " " + String.format("%.1f", value) + "%\n";
         }else{
-            return '\'' + name + '\'' + ": "+ (int)value + "\n";
+            return name + " " + (int)value + "\n";
         }
     }
 }

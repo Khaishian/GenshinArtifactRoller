@@ -1,4 +1,4 @@
-package Domain;
+package Mihoyo;
 
 import java.util.Random;
 
